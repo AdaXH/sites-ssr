@@ -1,0 +1,32 @@
+@import url(@/common/styles/animation.module.less);
+.body {
+  margin: 0 auto;
+  width: 1200px;
+  position: relative;
+  // background-color: #f1f1f1;
+  box-shadow: 0px 0px 20px -5px rgba(158, 158, 158, 0.87);
+}
+
+.animate {
+  animation: fadeIn 0.3s forwards;
+  left: 0;
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  // .left2Right();
+  // min-height: 100vh;
+}
+.animate::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+.animate::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+.animate::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  box-shadow: transparent;
+  background-color: transparent;
+}
