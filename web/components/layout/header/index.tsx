@@ -16,7 +16,6 @@ interface Props {
 
 export const Header: React.FC<Props> = (props) => {
   const { history, user = {} } = props;
-  console.log('history', history);
   const {
     location: { pathname },
     push,
