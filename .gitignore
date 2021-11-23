@@ -20,3 +20,8 @@ code.zip
 .env_temp
 f.origin.yml
 .eslintcache
+
+build/server/*
+build/create-context.ts
+build/ssr-temporary-routes.js
+build/asyncChunkMap.json

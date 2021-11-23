@@ -64,7 +64,6 @@ export const Registry: React.FC<{
         return;
       }
     } catch (error) {
-      console.log('error', error);
       Notification.fail({ msg: error?.message || error?.errorMsg });
     }
   };
