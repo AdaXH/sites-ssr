@@ -1,2 +1,5 @@
-export * from './page-index'
-export * from './detail-index'
+type SiteType = 'technology' | 'life' | 'info' | 'others';
+
+interface CommonObj {
+  [c: string]: any;
+}

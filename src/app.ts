@@ -1,15 +1,23 @@
-import { initialSSRDevProxy } from 'ssr-server-utils'
-import { Application } from 'egg'
+import { initialSSRDevProxy } from 'ssr-server-utils';
+import { Application } from 'egg';
+import { Database } from './common';
+import port from './config/port';
 
 class AppBootHook {
-  app: Application
-  constructor (app) {
-    this.app = app
+  app: Application;
+  constructor(app) {
+    this.app = app;
   }
 
-  async willReady () {
-    await initialSSRDevProxy(this.app)
+  async connectDb() {
+    const db = new Database(port[this.app.env]?.host);
+    await db.connect();
+  }
+
+  async willReady() {
+    await this.connectDb();
+    await initialSSRDevProxy(this.app);
   }
 }
 
-export default AppBootHook
+export default AppBootHook;

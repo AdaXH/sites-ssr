@@ -2,11 +2,11 @@ import { Readable } from 'stream';
 import { Controller, Get, Provide, Inject } from '@midwayjs/decorator';
 import { Context } from 'egg';
 import { render } from 'ssr-core-react';
-import { IApiService } from '../interface';
+import { ApiDetailService } from '@/service/detail';
+import { UserService } from '@/service/User';
 
 interface IEggContext extends Context {
   body: Readable;
-  apiService: IApiService;
 }
 
 @Provide()
@@ -15,14 +15,17 @@ export class Index {
   @Inject()
   ctx: IEggContext;
 
-  @Inject('ApiService')
-  apiService: IApiService;
+  @Inject('ApiDetailService')
+  apiService: ApiDetailService;
+
+  @Inject('UserService')
+  userService: UserService;
 
   @Get('/')
-  @Get('/detail/:id')
   async handler(): Promise<void> {
     try {
-      this.ctx.apiService = this.apiService;
+      this.ctx.ApiDetailService = this.apiService;
+      this.ctx.userService = this.userService;
       const stream = await render<Readable>(this.ctx, {
         stream: true,
       });

@@ -18,6 +18,7 @@ export class ResponseMiddleware implements IWebMiddleware {
         if (/text\/html/.test(ContentType as string)) return;
         ctx.body = CommonResponse.success(res);
       } catch (error) {
+        console.log('error', error);
         ctx.body = CommonResponse.error(error);
       }
     };

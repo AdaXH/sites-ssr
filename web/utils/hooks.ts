@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Ref } from 'react';
 
 export function useDidMount(callback: Function) {
   useEffect(() => {
@@ -12,7 +12,7 @@ export function useUnmount(callback: Function) {
   }, []);
 }
 
-export function useInterval(callback: Function, delay: number) {
+export function useInterval(callback: Function, delay: Number) {
   const savedCallback: Ref<Function> = useRef();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function useInterval(callback: Function, delay: number) {
   }, [delay]);
 }
 
-export function useLoop(request, timeout) {
+export function useLoop<T extends (...args: any[]) => any>(request: T, timeout: Number) {
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
@@ -41,15 +41,15 @@ export function useLoop(request, timeout) {
     try {
       const res = await request();
       setResult(res);
-    } catch (e) {
-      setError(e);
+    } catch (e: any) {
+      setError(e?.message);
     }
   }, timeout);
 
   return [error, result];
 }
 
-export function useDebounce(value, delay: number) {
+export function useDebounce(value: any, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -64,7 +64,7 @@ export function useDebounce(value, delay: number) {
 
 export function useLoading<T extends (...args: any[]) => any>(cb: T): any {
   const [loading, setLoading] = useState<Boolean>(false);
-  const arg = useRef<any[]>();
+  const arg = useRef<any[]>([]);
   useEffect(() => {
     async function work() {
       try {
@@ -81,7 +81,7 @@ export function useLoading<T extends (...args: any[]) => any>(cb: T): any {
   }, [loading]);
   return [
     loading,
-    (...args) => {
+    (...args: any[]) => {
       arg.current = args;
       setLoading(true);
     },

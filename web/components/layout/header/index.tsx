@@ -80,7 +80,7 @@ export const Header: React.FC<Props> = (props) => {
 
   useEffect(() => {
     function listenScroll(e: Event) {
-      const top = document.scrollingElement.scrollTop;
+      const top = document?.scrollingElement?.scrollTop || 0;
       setVisible(top >= MAX_TOP_HEIGHT);
     }
     window.addEventListener(

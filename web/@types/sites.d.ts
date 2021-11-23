@@ -1,11 +1,7 @@
 type SITETYPE = 'technology' | 'life' | 'info' | 'others';
 
-declare module 'site-type' {
-  export type SITETYPE = SITETYPE;
-}
-
 interface AnyCommonObj {
-  [x: ?any]: any;
+  [x: string]: any;
 }
 
 interface SiteModel {
